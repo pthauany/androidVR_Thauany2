@@ -7,7 +7,7 @@ public class playerMovement : MonoBehaviour
     public CharacterController controller;
 
     public float speed = 12f;
-    public float gravity = -9.81f * 2;
+    public float gravity = -9.81f;
     public float jumpHeigh = 3f;
 
     public Transform groundCheck;
@@ -36,7 +36,7 @@ public class playerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * x + transform.forward * z;
+        Vector3 move = transform.right * x + transform.forward * y;
 
         controller.Move(move * speed * Time.deltaTime);
 
@@ -44,6 +44,8 @@ public class playerMovement : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeigh * -2f * gravity);
         }
+
+        controller.Move(move * speed * Time.deltaTime);
 
         velocity.y += gravity * Time.deltaTime;
 
